@@ -20,7 +20,7 @@ transfer-curve effect. Framework-free processing stays in
 - `src/telemetry.rs` owns lock-free per-stage signal-on-curve observation plus stereo post-input-gain and post-Mix peak/clip publication.
 - `src/lib.rs` owns the CLAP shell, layouts, activity, tail behavior and editor construction.
 - `control-map.json` maps Mix to the existing dynamics role; Input gain and Auto makeup have no
-  collection-wide role. The licence is the workspace's (`../../LICENSE`).
+  collection-wide role. The licence is the repository's root `LICENSE` (`../../LICENSE`).
 
 # Local Contracts
 
@@ -166,7 +166,9 @@ clap-validator validate target/bundled/mxm-fx-curve.clap
 What the unit suite covers and the last bundle/validator/native results:
 [NOTES.md § What the tests cover](NOTES.md#what-the-tests-cover-and-the-last-verification). The
 native 75–200% sweep, real-DAW state-dirty behavior, listening approval, Linux and macOS remain
-unverified from the Windows development machine.
+unverified from the Windows development machine. *Since the split (2026-10-06):* Linux builds and
+tests run in WSL before a push, and CI builds and tests macOS on `v*` release tags or by hand;
+native-window, DAW and listening checks there are still not done.
 
 # Child DOX Index
 

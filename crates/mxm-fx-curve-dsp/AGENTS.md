@@ -10,7 +10,7 @@ a serial stage chain, the curve-derived nominal makeup estimate and the final dr
 
 The product contract is `../../plans/plan-mxm-fx-curve.md` (`plans/plan-mxm-fx-curve.md` in the private archive); the
 dynamics technique is `research:effects/dynamics-processing.md`; the collection's own waveshaping
-evidence is [`../../docs/oscillators/17-waveshaping-and-folding.md`](https://github.com/mxm-audio/mxm-kit/blob/main/docs/oscillators/17-waveshaping-and-folding.md).
+evidence is mxm-kit's [`docs/oscillators/17-waveshaping-and-folding.md`](https://github.com/mxm-audio/mxm-kit/blob/main/docs/oscillators/17-waveshaping-and-folding.md).
 No existing processor implementation was opened.
 
 # Ownership
@@ -113,7 +113,8 @@ extremes, identity/reduction/lift/silent nominal-makeup behavior, Mix-zero ident
 silence, serial order, compatible-prefix history carry and
 zero allocator/destructor operations inside DSP processing. Plugin callback allocation instrumentation,
 transition publication/retirement, host activity/tail, Linux/macOS and
-real-DAW behavior belong to later phases.
+real-DAW behavior belong to later phases. *Since the split (2026-10-06):* Linux builds and tests run
+in WSL before a push, and CI builds and tests macOS on `v*` release tags or by hand.
 
 # Child DOX Index
 

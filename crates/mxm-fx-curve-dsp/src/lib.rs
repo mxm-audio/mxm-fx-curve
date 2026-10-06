@@ -2,8 +2,9 @@
 //!
 //! This is an original transfer-curve processor against the public dynamics technique documented at
 //! `research:effects/dynamics-processing.md` and the collection's own waveshaping measurements in
-//! `docs/oscillators/17-waveshaping-and-folding.md`. No existing processor implementation was
-//! opened. The accepted point interaction is recorded in `plans/plan-mxm-fx-curve.md` C0.5.
+//! `docs/oscillators/17-waveshaping-and-folding.md` (in mxm-kit). No existing processor
+//! implementation was opened. The accepted point interaction is recorded in
+//! `plans/plan-mxm-fx-curve.md` C0.5.
 //!
 //! An authored [`Curve`] is prepared off audio into [`CurveTable`]: one lookup table and one
 //! antiderivative table per non-vertical point pair. Equal-X points are intentional discontinuities

@@ -1,6 +1,6 @@
 # mxm-fx-curve — UI design brief
 
-Answers `docs/MXM_DESIGN_SYSTEM.md` §14's ten questions before the editor is built, as
+Answers mxm-kit's [`docs/MXM_DESIGN_SYSTEM.md`](https://github.com/mxm-audio/mxm-kit/blob/main/docs/MXM_DESIGN_SYSTEM.md) §14's ten questions before the editor is built, as
 `plugins/AGENTS.md` requires. The plan is `plans/plan-mxm-fx-curve.md`; the reference is
 `research:effects/dynamics-processing.md`.
 

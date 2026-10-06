@@ -133,7 +133,7 @@ route, every factory model under running audio, repeated editor commits across t
 concurrent with audio, add/reorder/edit churn across same-rate reactivation, no callback allocator
 operations, stereo post-gain input and post-Mix output peak/clip telemetry (including input
 observation at Mix zero), wide-window canvas growth, exact silent activity and permanent identity.
-The ignored player native-window test inventories this editor. Current Windows debug and release
+The ignored player native-window test (in mxm-player since the split) inventories this editor. Current Windows debug and release
 bundles each pass clap-validator with 33 passed, 0 failed and 11 skipped. The release bundle is
 restored as the current artifact. Fresh release-bundle captures cover the opening size and 1800 ×
 800 at 100%, including the matched In/Out rails. A native three-chip drag moved a new memoryless
