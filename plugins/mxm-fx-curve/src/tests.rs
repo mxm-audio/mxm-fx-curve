@@ -14,6 +14,8 @@ struct ModelHost {
 }
 
 impl GuiContextInner for ModelHost {
+    // A test double has no host to ask for a restart (nice-plug 0.4).
+    fn request_restart(&self) {}
     fn plugin_api(&self) -> PluginApi {
         PluginApi::Clap
     }
