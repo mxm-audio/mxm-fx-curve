@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-fx-curve",
+  "name": "Gentle overdrive",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "automakeup": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "inputgain": {
+      "v": 0.5,
+      "text": "0.0 dB"
+    },
+    "mix": {
+      "v": 0.78,
+      "text": "78 %"
+    }
+  },
+  "state": {
+    "schema_version": 1,
+    "stages": [
+      {
+        "mode": {
+          "kind": "memoryless"
+        },
+        "points": [
+          {
+            "mode": "curve",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "curve",
+            "x": 0.18000000715255737,
+            "y": 0.30000001192092896
+          },
+          {
+            "mode": "curve",
+            "x": 0.47999998927116394,
+            "y": 0.6200000047683716
+          },
+          {
+            "mode": "curve",
+            "x": 0.7799999713897705,
+            "y": 0.8199999928474426
+          },
+          {
+            "mode": "curve",
+            "x": 1.0,
+            "y": 0.8999999761581421
+          }
+        ]
+      }
+    ]
+  }
+}

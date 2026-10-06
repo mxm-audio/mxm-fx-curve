@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-fx-curve",
+  "name": "Two stage limiter",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "automakeup": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "inputgain": {
+      "v": 0.5,
+      "text": "0.0 dB"
+    },
+    "mix": {
+      "v": 1.0,
+      "text": "100 %"
+    }
+  },
+  "state": {
+    "schema_version": 1,
+    "stages": [
+      {
+        "mode": {
+          "attack_ms": 8.0,
+          "kind": "detector",
+          "release_ms": 220.0
+        },
+        "points": [
+          {
+            "mode": "curve",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "curve",
+            "x": 0.5799999833106995,
+            "y": 0.5799999833106995
+          },
+          {
+            "mode": "curve",
+            "x": 0.7799999713897705,
+            "y": 0.6800000071525574
+          },
+          {
+            "mode": "curve",
+            "x": 1.0,
+            "y": 0.7200000286102295
+          }
+        ]
+      },
+      {
+        "mode": {
+          "attack_ms": 0.20000000298023224,
+          "kind": "detector",
+          "release_ms": 70.0
+        },
+        "points": [
+          {
+            "mode": "linear",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "linear",
+            "x": 0.6200000047683716,
+            "y": 0.6200000047683716
+          },
+          {
+            "mode": "linear",
+            "x": 0.699999988079071,
+            "y": 0.6800000071525574
+          },
+          {
+            "mode": "linear",
+            "x": 1.0,
+            "y": 0.6800000071525574
+          }
+        ]
+      }
+    ]
+  }
+}

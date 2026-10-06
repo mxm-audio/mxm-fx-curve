@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "_comment": [
+    "Which of mxm-fx-curve's parameters fill the collection's control roles.",
+    "Roles come from docs/MXM_CONTROL_MAP.md and parameters use permanent string ids.",
+    "",
+    "Mix fills fx.dynamics: how much of the serial memoryless/detector curve stack is in",
+    "what the player hears. Input gain and Auto makeup have no collection-wide control role.",
+    "Authored curves and stage settings are durable model state, not control-map roles."
+  ],
+  "instruments": [
+    {
+      "clap_id": "dk.mxm.mxm-fx-curve",
+      "name": "mxm-fx-curve",
+      "params": {
+        "fx.dynamics": "mix"
+      }
+    }
+  ]
+}

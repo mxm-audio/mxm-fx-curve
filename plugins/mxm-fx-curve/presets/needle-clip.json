@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-fx-curve",
+  "name": "Needle clip",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "automakeup": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "inputgain": {
+      "v": 0.5,
+      "text": "0.0 dB"
+    },
+    "mix": {
+      "v": 0.82,
+      "text": "82 %"
+    }
+  },
+  "state": {
+    "schema_version": 1,
+    "stages": [
+      {
+        "mode": {
+          "kind": "memoryless"
+        },
+        "points": [
+          {
+            "mode": "curve",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "curve",
+            "x": 0.10000000149011612,
+            "y": 0.18000000715255737
+          },
+          {
+            "mode": "curve",
+            "x": 0.41999998688697815,
+            "y": 0.5
+          },
+          {
+            "mode": "curve",
+            "x": 0.7200000286102295,
+            "y": 0.9599999785423279
+          },
+          {
+            "mode": "curve",
+            "x": 0.8199999928474426,
+            "y": 0.7799999713897705
+          },
+          {
+            "mode": "curve",
+            "x": 1.0,
+            "y": 0.800000011920929
+          }
+        ]
+      }
+    ]
+  }
+}

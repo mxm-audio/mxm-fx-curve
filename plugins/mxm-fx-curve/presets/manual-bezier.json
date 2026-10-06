@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-fx-curve",
+  "name": "Manual bezier",
+  "category": "template",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "automakeup": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "inputgain": {
+      "v": 0.5,
+      "text": "0.0 dB"
+    },
+    "mix": {
+      "v": 1.0,
+      "text": "100 %"
+    }
+  },
+  "state": {
+    "schema_version": 1,
+    "stages": [
+      {
+        "mode": {
+          "kind": "memoryless"
+        },
+        "points": [
+          {
+            "mode": "curve",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "handles": {
+              "incoming": {
+                "dx": -0.1599999964237213,
+                "dy": -0.019999999552965164
+              },
+              "outgoing": {
+                "dx": 0.1599999964237213,
+                "dy": 0.23999999463558197
+              }
+            },
+            "mode": "handles",
+            "x": 0.5,
+            "y": 0.41999998688697815
+          },
+          {
+            "mode": "curve",
+            "x": 1.0,
+            "y": 1.0
+          }
+        ]
+      }
+    ]
+  }
+}

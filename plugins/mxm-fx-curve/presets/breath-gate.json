@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-fx-curve",
+  "name": "Breath gate",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "automakeup": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "inputgain": {
+      "v": 0.5,
+      "text": "0.0 dB"
+    },
+    "mix": {
+      "v": 1.0,
+      "text": "100 %"
+    }
+  },
+  "state": {
+    "schema_version": 1,
+    "stages": [
+      {
+        "mode": {
+          "attack_ms": 8.0,
+          "kind": "detector",
+          "release_ms": 300.0
+        },
+        "points": [
+          {
+            "mode": "curve",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "curve",
+            "x": 0.03500000014901161,
+            "y": 0.0
+          },
+          {
+            "mode": "curve",
+            "x": 0.07500000298023224,
+            "y": 0.03500000014901161
+          },
+          {
+            "mode": "curve",
+            "x": 0.1599999964237213,
+            "y": 0.14000000059604645
+          },
+          {
+            "mode": "curve",
+            "x": 1.0,
+            "y": 1.0
+          }
+        ]
+      }
+    ]
+  }
+}

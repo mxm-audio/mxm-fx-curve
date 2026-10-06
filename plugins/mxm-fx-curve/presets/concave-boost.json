@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-fx-curve",
+  "name": "Concave boost",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "automakeup": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "inputgain": {
+      "v": 0.5,
+      "text": "0.0 dB"
+    },
+    "mix": {
+      "v": 0.7,
+      "text": "70 %"
+    }
+  },
+  "state": {
+    "schema_version": 1,
+    "stages": [
+      {
+        "mode": {
+          "kind": "memoryless"
+        },
+        "points": [
+          {
+            "mode": "curve",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "curve",
+            "x": 0.07999999821186066,
+            "y": 0.25
+          },
+          {
+            "mode": "curve",
+            "x": 0.2800000011920929,
+            "y": 0.5199999809265137
+          },
+          {
+            "mode": "curve",
+            "x": 0.6000000238418579,
+            "y": 0.7799999713897705
+          },
+          {
+            "mode": "curve",
+            "x": 1.0,
+            "y": 1.0
+          }
+        ]
+      }
+    ]
+  }
+}

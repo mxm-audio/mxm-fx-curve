@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-fx-curve",
+  "name": "Vocal leveler",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "automakeup": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "inputgain": {
+      "v": 0.5,
+      "text": "0.0 dB"
+    },
+    "mix": {
+      "v": 1.0,
+      "text": "100 %"
+    }
+  },
+  "state": {
+    "schema_version": 1,
+    "stages": [
+      {
+        "mode": {
+          "attack_ms": 20.0,
+          "kind": "detector",
+          "release_ms": 250.0
+        },
+        "points": [
+          {
+            "mode": "curve",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "curve",
+            "x": 0.3499999940395355,
+            "y": 0.3499999940395355
+          },
+          {
+            "mode": "curve",
+            "x": 0.699999988079071,
+            "y": 0.5799999833106995
+          },
+          {
+            "mode": "curve",
+            "x": 1.0,
+            "y": 0.7200000286102295
+          }
+        ]
+      }
+    ]
+  }
+}

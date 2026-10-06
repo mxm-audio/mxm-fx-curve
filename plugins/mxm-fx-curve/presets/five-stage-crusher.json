@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-fx-curve",
+  "name": "Five stage crusher",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "automakeup": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "inputgain": {
+      "v": 0.5,
+      "text": "0.0 dB"
+    },
+    "mix": {
+      "v": 0.7,
+      "text": "70 %"
+    }
+  },
+  "state": {
+    "schema_version": 1,
+    "stages": [
+      {
+        "mode": {
+          "kind": "memoryless"
+        },
+        "points": [
+          {
+            "mode": "curve",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "curve",
+            "x": 0.25,
+            "y": 0.05999999865889549
+          },
+          {
+            "mode": "curve",
+            "x": 0.550000011920929,
+            "y": 0.2800000011920929
+          },
+          {
+            "mode": "curve",
+            "x": 0.800000011920929,
+            "y": 0.6200000047683716
+          },
+          {
+            "mode": "curve",
+            "x": 1.0,
+            "y": 1.0
+          }
+        ]
+      },
+      {
+        "mode": {
+          "kind": "memoryless"
+        },
+        "points": [
+          {
+            "mode": "linear",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "linear",
+            "x": 0.11999999731779099,
+            "y": 0.2199999988079071
+          },
+          {
+            "mode": "linear",
+            "x": 0.2800000011920929,
+            "y": 0.2199999988079071
+          },
+          {
+            "mode": "linear",
+            "x": 0.2800000011920929,
+            "y": 0.47999998927116394
+          },
+          {
+            "mode": "linear",
+            "x": 0.5199999809265137,
+            "y": 0.47999998927116394
+          },
+          {
+            "mode": "linear",
+            "x": 0.5199999809265137,
+            "y": 0.7200000286102295
+          },
+          {
+            "mode": "linear",
+            "x": 0.7799999713897705,
+            "y": 0.7200000286102295
+          },
+          {
+            "mode": "linear",
+            "x": 0.7799999713897705,
+            "y": 0.9200000166893005
+          },
+          {
+            "mode": "linear",
+            "x": 1.0,
+            "y": 0.9200000166893005
+          }
+        ]
+      },
+      {
+        "mode": {
+          "kind": "memoryless"
+        },
+        "points": [
+          {
+            "mode": "linear",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "linear",
+            "x": 0.41999998688697815,
+            "y": 0.8799999952316284
+          },
+          {
+            "mode": "linear",
+            "x": 0.7200000286102295,
+            "y": 0.2199999988079071
+          },
+          {
+            "mode": "linear",
+            "x": 1.0,
+            "y": 0.7400000095367432
+          }
+        ]
+      },
+      {
+        "mode": {
+          "attack_ms": 1.0,
+          "kind": "detector",
+          "release_ms": 80.0
+        },
+        "points": [
+          {
+            "mode": "linear",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "linear",
+            "x": 0.41999998688697815,
+            "y": 0.41999998688697815
+          },
+          {
+            "mode": "linear",
+            "x": 0.5,
+            "y": 0.47999998927116394
+          },
+          {
+            "mode": "linear",
+            "x": 1.0,
+            "y": 0.47999998927116394
+          }
+        ]
+      },
+      {
+        "mode": {
+          "kind": "memoryless"
+        },
+        "points": [
+          {
+            "mode": "linear",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "linear",
+            "x": 0.3199999928474426,
+            "y": 0.7200000286102295
+          },
+          {
+            "mode": "linear",
+            "x": 1.0,
+            "y": 0.7200000286102295
+          }
+        ]
+      }
+    ]
+  }
+}

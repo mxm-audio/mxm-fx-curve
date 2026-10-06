@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-fx-curve",
+  "name": "Clip then fold",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "automakeup": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "inputgain": {
+      "v": 0.5,
+      "text": "0.0 dB"
+    },
+    "mix": {
+      "v": 0.72,
+      "text": "72 %"
+    }
+  },
+  "state": {
+    "schema_version": 1,
+    "stages": [
+      {
+        "mode": {
+          "kind": "memoryless"
+        },
+        "points": [
+          {
+            "mode": "linear",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "linear",
+            "x": 0.6200000047683716,
+            "y": 0.8199999928474426
+          },
+          {
+            "mode": "linear",
+            "x": 1.0,
+            "y": 0.8199999928474426
+          }
+        ]
+      },
+      {
+        "mode": {
+          "kind": "memoryless"
+        },
+        "points": [
+          {
+            "mode": "linear",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "linear",
+            "x": 0.41999998688697815,
+            "y": 0.8799999952316284
+          },
+          {
+            "mode": "linear",
+            "x": 0.7200000286102295,
+            "y": 0.2199999988079071
+          },
+          {
+            "mode": "linear",
+            "x": 1.0,
+            "y": 0.7400000095367432
+          }
+        ]
+      }
+    ]
+  }
+}

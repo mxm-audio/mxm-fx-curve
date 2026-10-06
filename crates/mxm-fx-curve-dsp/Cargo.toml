@@ -1,0 +1,16 @@
+[package]
+name = "mxm-fx-curve-dsp"
+description = "Framework-free DSP for mxm-fx-curve: prepared transfer curves, dynamics and distortion"
+version.workspace = true
+edition.workspace = true
+# Zero runtime dependencies and no GUI: genuinely portable below the workspace floor.
+rust-version = "1.87"
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[dependencies]
+
+[dev-dependencies]
+# Measurement rulers for tests and the alias/cost harnesses only.
+mxm-measure.workspace = true

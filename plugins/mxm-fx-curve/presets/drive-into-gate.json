@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-fx-curve",
+  "name": "Drive into gate",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "automakeup": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "inputgain": {
+      "v": 0.5,
+      "text": "0.0 dB"
+    },
+    "mix": {
+      "v": 0.9,
+      "text": "90 %"
+    }
+  },
+  "state": {
+    "schema_version": 1,
+    "stages": [
+      {
+        "mode": {
+          "kind": "memoryless"
+        },
+        "points": [
+          {
+            "mode": "curve",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "curve",
+            "x": 0.07999999821186066,
+            "y": 0.2800000011920929
+          },
+          {
+            "mode": "curve",
+            "x": 0.25,
+            "y": 0.5799999833106995
+          },
+          {
+            "mode": "curve",
+            "x": 0.550000011920929,
+            "y": 0.8199999928474426
+          },
+          {
+            "mode": "curve",
+            "x": 1.0,
+            "y": 0.9399999976158142
+          }
+        ]
+      },
+      {
+        "mode": {
+          "attack_ms": 2.0,
+          "kind": "detector",
+          "release_ms": 110.0
+        },
+        "points": [
+          {
+            "mode": "curve",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "curve",
+            "x": 0.07000000029802322,
+            "y": 0.0
+          },
+          {
+            "mode": "curve",
+            "x": 0.14000000059604645,
+            "y": 0.07999999821186066
+          },
+          {
+            "mode": "curve",
+            "x": 0.2800000011920929,
+            "y": 0.25
+          },
+          {
+            "mode": "curve",
+            "x": 1.0,
+            "y": 1.0
+          }
+        ]
+      }
+    ]
+  }
+}

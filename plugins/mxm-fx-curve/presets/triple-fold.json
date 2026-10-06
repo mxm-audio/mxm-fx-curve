@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-fx-curve",
+  "name": "Triple fold",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "automakeup": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "inputgain": {
+      "v": 0.5,
+      "text": "0.0 dB"
+    },
+    "mix": {
+      "v": 0.72,
+      "text": "72 %"
+    }
+  },
+  "state": {
+    "schema_version": 1,
+    "stages": [
+      {
+        "mode": {
+          "kind": "memoryless"
+        },
+        "points": [
+          {
+            "mode": "linear",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "linear",
+            "x": 0.17000000178813934,
+            "y": 0.7799999713897705
+          },
+          {
+            "mode": "linear",
+            "x": 0.3400000035762787,
+            "y": 0.07999999821186066
+          },
+          {
+            "mode": "linear",
+            "x": 0.5199999809265137,
+            "y": 0.8600000143051147
+          },
+          {
+            "mode": "linear",
+            "x": 0.699999988079071,
+            "y": 0.11999999731779099
+          },
+          {
+            "mode": "linear",
+            "x": 0.8600000143051147,
+            "y": 0.9200000166893005
+          },
+          {
+            "mode": "linear",
+            "x": 1.0,
+            "y": 0.2199999988079071
+          }
+        ]
+      }
+    ]
+  }
+}

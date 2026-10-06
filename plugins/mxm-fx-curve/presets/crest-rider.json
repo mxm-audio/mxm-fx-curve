@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-fx-curve",
+  "name": "Crest rider",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "automakeup": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "inputgain": {
+      "v": 0.5,
+      "text": "0.0 dB"
+    },
+    "mix": {
+      "v": 0.9,
+      "text": "90 %"
+    }
+  },
+  "state": {
+    "schema_version": 1,
+    "stages": [
+      {
+        "mode": {
+          "attack_ms": 8.0,
+          "kind": "detector",
+          "release_ms": 180.0
+        },
+        "points": [
+          {
+            "mode": "curve",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "curve",
+            "x": 0.07999999821186066,
+            "y": 0.14000000059604645
+          },
+          {
+            "mode": "curve",
+            "x": 0.3499999940395355,
+            "y": 0.41999998688697815
+          },
+          {
+            "mode": "curve",
+            "x": 0.699999988079071,
+            "y": 0.6499999761581421
+          },
+          {
+            "mode": "curve",
+            "x": 1.0,
+            "y": 0.7799999713897705
+          }
+        ]
+      }
+    ]
+  }
+}

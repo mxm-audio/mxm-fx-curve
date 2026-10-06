@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-fx-curve",
+  "name": "Eight step quantizer",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "automakeup": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "inputgain": {
+      "v": 0.5,
+      "text": "0.0 dB"
+    },
+    "mix": {
+      "v": 0.9,
+      "text": "90 %"
+    }
+  },
+  "state": {
+    "schema_version": 1,
+    "stages": [
+      {
+        "mode": {
+          "kind": "memoryless"
+        },
+        "points": [
+          {
+            "mode": "linear",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "linear",
+            "x": 0.0625,
+            "y": 0.0
+          },
+          {
+            "mode": "linear",
+            "x": 0.0625,
+            "y": 0.125
+          },
+          {
+            "mode": "linear",
+            "x": 0.1875,
+            "y": 0.125
+          },
+          {
+            "mode": "linear",
+            "x": 0.1875,
+            "y": 0.25
+          },
+          {
+            "mode": "linear",
+            "x": 0.3125,
+            "y": 0.25
+          },
+          {
+            "mode": "linear",
+            "x": 0.3125,
+            "y": 0.375
+          },
+          {
+            "mode": "linear",
+            "x": 0.4375,
+            "y": 0.375
+          },
+          {
+            "mode": "linear",
+            "x": 0.4375,
+            "y": 0.5
+          },
+          {
+            "mode": "linear",
+            "x": 0.5625,
+            "y": 0.5
+          },
+          {
+            "mode": "linear",
+            "x": 0.5625,
+            "y": 0.625
+          },
+          {
+            "mode": "linear",
+            "x": 0.6875,
+            "y": 0.625
+          },
+          {
+            "mode": "linear",
+            "x": 0.6875,
+            "y": 0.75
+          },
+          {
+            "mode": "linear",
+            "x": 0.8125,
+            "y": 0.75
+          },
+          {
+            "mode": "linear",
+            "x": 0.8125,
+            "y": 0.875
+          },
+          {
+            "mode": "linear",
+            "x": 0.9375,
+            "y": 0.875
+          },
+          {
+            "mode": "linear",
+            "x": 0.9375,
+            "y": 1.0
+          },
+          {
+            "mode": "linear",
+            "x": 1.0,
+            "y": 1.0
+          }
+        ]
+      }
+    ]
+  }
+}

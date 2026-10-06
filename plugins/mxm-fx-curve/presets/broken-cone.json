@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-fx-curve",
+  "name": "Broken cone",
+  "category": "fx",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "automakeup": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "inputgain": {
+      "v": 0.5,
+      "text": "0.0 dB"
+    },
+    "mix": {
+      "v": 0.76,
+      "text": "76 %"
+    }
+  },
+  "state": {
+    "schema_version": 1,
+    "stages": [
+      {
+        "mode": {
+          "kind": "memoryless"
+        },
+        "points": [
+          {
+            "mode": "linear",
+            "x": 0.0,
+            "y": 0.0
+          },
+          {
+            "mode": "linear",
+            "x": 0.1599999964237213,
+            "y": 0.25
+          },
+          {
+            "mode": "linear",
+            "x": 0.3400000035762787,
+            "y": 0.18000000715255737
+          },
+          {
+            "mode": "linear",
+            "x": 0.5600000023841858,
+            "y": 0.7200000286102295
+          },
+          {
+            "mode": "linear",
+            "x": 0.7599999904632568,
+            "y": 0.5799999833106995
+          },
+          {
+            "mode": "linear",
+            "x": 1.0,
+            "y": 0.9200000166893005
+          }
+        ]
+      }
+    ]
+  }
+}
