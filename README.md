@@ -15,8 +15,8 @@ cargo xtask bundle mxm-fx-curve --release   # -> target/bundled/mxm-fx-curve.cla
 cargo test
 ```
 
-Copy `target/bundled/mxm-fx-curve.clap` into your CLAP folder. The official, signed builds are
-at [mxm.dk](https://mxm.dk).
+Copy `target/bundled/mxm-fx-curve.clap` into your CLAP folder. This is pre-alpha:
+nothing is released, so there are no official builds yet.
 
 ## Licence
 

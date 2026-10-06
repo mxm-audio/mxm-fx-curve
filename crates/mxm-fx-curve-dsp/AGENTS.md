@@ -114,7 +114,7 @@ silence, serial order, compatible-prefix history carry and
 zero allocator/destructor operations inside DSP processing. Plugin callback allocation instrumentation,
 transition publication/retirement, host activity/tail, Linux/macOS and
 real-DAW behavior belong to later phases. *Since the split (2026-10-06):* Linux builds and tests run
-in WSL before a push, and CI builds and tests macOS on `v*` release tags or by hand.
+in WSL before a push, and CI builds and tests macOS on `v*` tags or by hand.
 
 # Child DOX Index
 
