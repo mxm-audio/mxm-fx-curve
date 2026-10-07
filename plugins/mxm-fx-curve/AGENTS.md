@@ -166,8 +166,8 @@ clap-validator validate target/bundled/mxm-fx-curve.clap
 What the unit suite covers and the last bundle/validator/native results:
 [NOTES.md § What the tests cover](NOTES.md#what-the-tests-cover-and-the-last-verification). The
 native 75–200% sweep, real-DAW state-dirty behavior, listening approval, Linux and macOS remain
-unverified from the Windows development machine. *Since the split (2026-10-06):* Linux builds and
-tests run in WSL before a push, and CI builds and tests macOS on `v*` tags or by hand;
+unverified from the Windows development machine. *Since the split (2026-10-06):* Linux and macOS are
+checked later, together (Windows only during the work), and by CI on `v*` tags or by hand;
 native-window, DAW and listening checks there are still not done.
 
 # Child DOX Index
