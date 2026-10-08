@@ -1356,7 +1356,7 @@ mod tests {
     /// **A focused canvas keeps the arrows, and `Escape` hands them back.** A point pressed onto
     /// the curve is nudged by every press, so egui did not carry the focus off after the first, and
     /// no host parameter moves, so the cursor stood aside rather than editing its parameter with the
-    /// same press. Once `Escape` leaves the canvas, the next arrow is the cursor's again.
+    /// same press. Once `Escape` leaves the canvas, the keys are the cursor's again.
     #[test]
     fn a_focused_canvas_keeps_the_arrows_and_escape_returns_them() {
         use egui::{Event, Key, Modifiers, PointerButton};
@@ -1409,14 +1409,16 @@ mod tests {
             &mut |ui| panel(ui, &mut app),
             keyboard_checks::press(Key::Escape, Modifiers::NONE),
         );
-        session.frame(
-            &mut |ui| panel(ui, &mut app),
-            keyboard_checks::press(Key::ArrowUp, Modifiers::NONE),
-        );
+        // VALUE + ↑, kept with OUT: W, ↑ and Tab in the default keymap.
+        let edit = [Key::W, Key::ArrowUp, Key::Tab]
+            .into_iter()
+            .flat_map(|key| keyboard_checks::press(key, Modifiers::NONE))
+            .collect();
+        session.frame(&mut |ui| panel(ui, &mut app), edit);
         session.frame(&mut |ui| panel(ui, &mut app), Vec::new());
         assert!(
             host.sets() > sets,
-            "after Escape the arrow was not the cursor's"
+            "after Escape the keys were not the cursor's"
         );
         assert_eq!(app.working.stages[0].points[1].y, nudged);
     }
