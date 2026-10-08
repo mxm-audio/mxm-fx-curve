@@ -55,7 +55,9 @@ transfer-curve effect. Framework-free processing stays in
   edits the model and is not a cursor target. **The cursor stands aside**
   (`keyboard_held_elsewhere`) whenever another widget holds egui's focus, so one arrow never edits
   two things. The canvas claims the arrows while focused and gives them back on a press elsewhere or
-  `Escape` ([NOTES.md § The keyboard cursor](NOTES.md#the-keyboard-cursor)).
+  `Escape` ([NOTES.md § The keyboard cursor](NOTES.md#the-keyboard-cursor)). **BACK during a drag
+  cancels it** (`mxm_ui::drag`; the owner, 2026-10-08): the gesture ends on the curve it began
+  with and commits nothing (`back_during_a_canvas_drag_puts_the_point_back`).
 - The canvas uses the collection cyan, its contrast measured with `mxm_ui::theme::contrast`
   ([NOTES.md § Canvas colour](NOTES.md#canvas-colour)).
 

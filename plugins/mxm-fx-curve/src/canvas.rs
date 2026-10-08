@@ -15,6 +15,9 @@ pub struct CanvasOutcome {
     pub changed: bool,
     pub gesture_started: bool,
     pub gesture_ended: bool,
+    /// BACK cancelled the drag that is ending (`mxm_ui::drag`): the gesture puts back the curve it
+    /// began with instead of committing.
+    pub cancelled: bool,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -368,6 +371,8 @@ impl CurveCanvas {
 
         if response.drag_stopped() {
             outcome.gesture_ended = self.held.is_some();
+            outcome.cancelled =
+                self.held.is_some() && mxm_ui::drag::cancelled(&response.ctx, response.id);
             self.held = None;
             self.snap_x = None;
             self.snap_y = None;

@@ -188,6 +188,13 @@ impl MxmFxCurveApp {
         if outcome.gesture_started && self.gesture_origin.is_none() {
             self.gesture_origin = Some(before);
         }
+        // A cancelled drag ends where it began, which the commit below treats as nothing changed:
+        // the audible preview goes and the committed curve stays.
+        if outcome.cancelled
+            && let Some(origin) = &self.gesture_origin
+        {
+            self.working = origin.clone();
+        }
         if outcome.changed
             && !outcome.gesture_ended
             && self.gesture_origin.is_some()
@@ -234,6 +241,7 @@ impl MxmFxCurveApp {
                 changed: true,
                 gesture_started: true,
                 gesture_ended: true,
+                cancelled: false,
             },
         );
         self.canvas.clear_selection();
@@ -1053,6 +1061,8 @@ fn apply_response(app: &mut MxmFxCurveApp, before: CurveStackState, response: Re
             changed: response.changed(),
             gesture_started: response.drag_started() || instantaneous,
             gesture_ended: response.drag_stopped() || instantaneous,
+            cancelled: response.drag_stopped()
+                && mxm_ui::drag::cancelled(&response.ctx, response.id),
         },
     );
 }
@@ -1062,6 +1072,7 @@ fn instant() -> CanvasOutcome {
         changed: true,
         gesture_started: true,
         gesture_ended: true,
+        cancelled: false,
     }
 }
 
@@ -1421,6 +1432,67 @@ mod tests {
             "after Escape the keys were not the cursor's"
         );
         assert_eq!(app.working.stages[0].points[1].y, nudged);
+    }
+
+    /// **BACK during a drag on the canvas cancels it** (the owner, 2026-10-08, as newDAWn): the
+    /// point goes back to where it was taken from and nothing is committed.
+    #[test]
+    fn back_during_a_canvas_drag_puts_the_point_back() {
+        use egui::{Event, Key, Modifiers, PointerButton};
+        let (mut app, _host) = recorded_app();
+        let session =
+            keyboard_checks::Session::new(egui::vec2(REFERENCE.0 as f32, REFERENCE.1 as f32));
+        session.settle(&mut |ui| panel(ui, &mut app));
+
+        // A click on Init's 1:1 line adds a point, committed as its own edit.
+        let at = app.canvas.rect().center();
+        let button = |pos, pressed| Event::PointerButton {
+            pos,
+            button: PointerButton::Primary,
+            pressed,
+            modifiers: Modifiers::NONE,
+        };
+        session.frame(
+            &mut |ui| panel(ui, &mut app),
+            vec![Event::PointerMoved(at), button(at, true)],
+        );
+        session.frame(&mut |ui| panel(ui, &mut app), vec![button(at, false)]);
+        session.frame(&mut |ui| panel(ui, &mut app), Vec::new());
+        assert_eq!(
+            app.working.stages[0].points.len(),
+            3,
+            "the click added a point"
+        );
+        let before = app.working.stages[0].points[1];
+        let revision = app.params.curves.revision();
+
+        // Take it and pull it up, then BACK with the button still down.
+        session.frame(
+            &mut |ui| panel(ui, &mut app),
+            vec![Event::PointerMoved(at), button(at, true)],
+        );
+        for step in 1..=4 {
+            let to = at - egui::vec2(0.0, 12.0 * step as f32);
+            session.frame(&mut |ui| panel(ui, &mut app), vec![Event::PointerMoved(to)]);
+        }
+        assert!(
+            app.working.stages[0].points[1].y > before.y,
+            "the drag moved the point"
+        );
+        session.frame(
+            &mut |ui| panel(ui, &mut app),
+            keyboard_checks::press(Key::Escape, Modifiers::NONE),
+        );
+        session.frame(&mut |ui| panel(ui, &mut app), Vec::new());
+        assert_eq!(
+            app.working.stages[0].points[1], before,
+            "BACK put the point back"
+        );
+        assert_eq!(
+            app.params.curves.revision(),
+            revision,
+            "a cancelled drag commits nothing"
+        );
     }
 
     /// The whole panel at the opening size, light and dark, for the owner's review of the
