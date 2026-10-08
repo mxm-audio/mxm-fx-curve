@@ -1335,6 +1335,7 @@ mod tests {
     use super::*;
 
     use mxm_plugin_test::keyboard_checks;
+    use mxm_plugin_test::keyboard_checks::{OUT, VALUE, key_of};
     use mxm_plugin_test::tree_checks;
 
     /// An editor wired to a host that counts gestures.
@@ -1420,8 +1421,8 @@ mod tests {
             &mut |ui| panel(ui, &mut app),
             keyboard_checks::press(Key::Escape, Modifiers::NONE),
         );
-        // VALUE + ↑, kept with OUT: W, ↑ and Tab in the default keymap.
-        let edit = [Key::W, Key::ArrowUp, Key::Tab]
+        // VALUE + ↑, kept with OUT.
+        let edit = [key_of(VALUE), Key::ArrowUp, key_of(OUT)]
             .into_iter()
             .flat_map(|key| keyboard_checks::press(key, Modifiers::NONE))
             .collect();
