@@ -18,6 +18,7 @@ nice-plug-egui.workspace = true
 mxm-fx-curve-dsp.workspace = true
 mxm-ui.workspace = true
 mxm-preset.workspace = true
+mxm-params.workspace = true
 serde = { version = "=1.0.229", features = ["derive"] }
 serde_json = "=1.0.145"
 

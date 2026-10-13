@@ -518,3 +518,15 @@ impl<'a> PersistentField<'a, CurveStackState> for CurveField {
             .unwrap_or_else(|error| error.into_inner()))
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// **Every parameter's text survives the host's round trip**, with the unit on, across the
+    /// collection's grids and switch points (`mxm_plugin_test::text_checks`).
+    #[test]
+    fn every_parameter_text_survives_the_hosts_round_trip() {
+        mxm_plugin_test::text_checks::every_text_round_trips(&MxmFxCurveParams::default(), &[]);
+    }
+}

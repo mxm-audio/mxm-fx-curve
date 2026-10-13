@@ -23,6 +23,7 @@ mxm-fx-curve-dsp = { path = "crates/mxm-fx-curve-dsp" }
 mxm-measure = { git = "https://github.com/mxm-audio/mxm-kit", branch = "main" }
 mxm-plugin-test = { git = "https://github.com/mxm-audio/mxm-kit", branch = "main" }
 mxm-preset = { git = "https://github.com/mxm-audio/mxm-kit", branch = "main" }
+mxm-params = { git = "https://github.com/mxm-audio/mxm-kit", branch = "main" }
 mxm-ui = { git = "https://github.com/mxm-audio/mxm-kit", branch = "main" }
 mxm-xtask = { git = "https://github.com/mxm-audio/mxm-kit", branch = "main" }
 nice-plug = { version = "=0.4.2", default-features = false, features = ["editor", "assert_process_allocs"] }
