@@ -395,6 +395,7 @@ impl NiceEguiApp for MxmFxCurveApp {
         mxm_ui::theme::apply(&context);
         mxm_ui::typography::apply(&context);
         context.set_theme(mxm_ui::theme::preference());
+        mxm_ui::navigation::use_shared_keymap(&context);
         self.telemetry.connect(true);
         self.context = Some(gui_context);
         self.synchronize();
