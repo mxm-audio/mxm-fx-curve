@@ -36,9 +36,10 @@ impl Telemetry {
                 pair[0].store(0, Ordering::Relaxed);
                 pair[1].store(0, Ordering::Relaxed);
             }
+            // The levels are transient and go; a clip latch stays until the user clicks its meter
+            // (`mxm_telemetry::PeakMeter`), closing the editor in between included.
             for meter in self.input.iter().chain(&self.output) {
                 let _ = meter.take();
-                meter.clear_clip();
             }
         }
     }
@@ -158,5 +159,34 @@ mod tests {
         telemetry.clear_output_clip(0);
         assert_eq!(telemetry.input_clipped(), [false, false]);
         assert_eq!(telemetry.output_clipped(), [false, false]);
+    }
+
+    /// **Closing the editor keeps a clip latched**: the levels go, the latch waits for the user's
+    /// click on its meter.
+    #[test]
+    fn closing_and_reopening_the_editor_keeps_a_clip_latched_until_it_is_clicked() {
+        let telemetry = Telemetry::default();
+        telemetry.connect(true);
+        telemetry.observe_input([0.5, 0.2], [true, false]);
+        telemetry.observe_output([0.3, 0.4], [false, true]);
+        telemetry.connect(false);
+        telemetry.connect(true);
+        assert_eq!(telemetry.take_input(), [0.0, 0.0], "the levels are gone");
+        assert_eq!(
+            telemetry.input_clipped(),
+            [true, false],
+            "the input latch stays"
+        );
+        assert_eq!(
+            telemetry.output_clipped(),
+            [false, true],
+            "the output latch stays"
+        );
+        telemetry.clear_input_clip(0);
+        assert_eq!(
+            telemetry.input_clipped(),
+            [false, false],
+            "a click clears it"
+        );
     }
 }
