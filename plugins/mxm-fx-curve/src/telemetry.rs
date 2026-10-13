@@ -5,10 +5,10 @@ use std::sync::atomic::{AtomicBool, AtomicU32, Ordering};
 pub struct Telemetry {
     connected: AtomicBool,
     levels: [[AtomicU32; 2]; mxm_fx_curve_dsp::MAX_STAGES],
-    input: [AtomicU32; 2],
-    output: [AtomicU32; 2],
-    input_clipped: [AtomicBool; 2],
-    output_clipped: [AtomicBool; 2],
+    /// The stereo input and output meters, one `PeakMeter` per channel: the collection's one meter
+    /// policy, latched also by the DSP's own per-channel clip flags (`mxm_telemetry`).
+    input: [mxm_telemetry::PeakMeter; 2],
+    output: [mxm_telemetry::PeakMeter; 2],
 }
 
 impl Default for Telemetry {
@@ -16,10 +16,14 @@ impl Default for Telemetry {
         Self {
             connected: AtomicBool::new(false),
             levels: std::array::from_fn(|_| std::array::from_fn(|_| AtomicU32::new(0))),
-            input: std::array::from_fn(|_| AtomicU32::new(0)),
-            output: std::array::from_fn(|_| AtomicU32::new(0)),
-            input_clipped: std::array::from_fn(|_| AtomicBool::new(false)),
-            output_clipped: std::array::from_fn(|_| AtomicBool::new(false)),
+            input: [
+                mxm_telemetry::PeakMeter::new(),
+                mxm_telemetry::PeakMeter::new(),
+            ],
+            output: [
+                mxm_telemetry::PeakMeter::new(),
+                mxm_telemetry::PeakMeter::new(),
+            ],
         }
     }
 }
@@ -32,11 +36,9 @@ impl Telemetry {
                 pair[0].store(0, Ordering::Relaxed);
                 pair[1].store(0, Ordering::Relaxed);
             }
-            for peak in self.input.iter().chain(&self.output) {
-                peak.store(0, Ordering::Relaxed);
-            }
-            for clipped in self.input_clipped.iter().chain(&self.output_clipped) {
-                clipped.store(false, Ordering::Relaxed);
+            for meter in self.input.iter().chain(&self.output) {
+                let _ = meter.take();
+                meter.clear_clip();
             }
         }
     }
@@ -56,17 +58,16 @@ impl Telemetry {
     }
 
     pub fn observe_input(&self, peaks: [f32; 2], clipped: [bool; 2]) {
-        self.observe_stereo(&self.input, &self.input_clipped, peaks, clipped);
+        self.observe_stereo(&self.input, peaks, clipped);
     }
 
     pub fn observe_output(&self, peaks: [f32; 2], clipped: [bool; 2]) {
-        self.observe_stereo(&self.output, &self.output_clipped, peaks, clipped);
+        self.observe_stereo(&self.output, peaks, clipped);
     }
 
     fn observe_stereo(
         &self,
-        targets: &[AtomicU32; 2],
-        clip_targets: &[AtomicBool; 2],
+        meters: &[mxm_telemetry::PeakMeter; 2],
         peaks: [f32; 2],
         clipped: [bool; 2],
     ) {
@@ -74,9 +75,9 @@ impl Telemetry {
             return;
         }
         for channel in 0..2 {
-            peak_store(&targets[channel], peaks[channel]);
+            meters[channel].publish(peaks[channel]);
             if clipped[channel] {
-                clip_targets[channel].store(true, Ordering::Relaxed);
+                meters[channel].latch_clip();
             }
         }
     }
@@ -88,43 +89,38 @@ impl Telemetry {
         (input > 0.0 || output > 0.0).then_some((input, output))
     }
 
+    /// The input's level per channel since the editor last read it, at most full scale: the rails
+    /// end there.
     pub fn take_input(&self) -> [f32; 2] {
-        take_stereo(&self.input)
+        self.input.each_ref().map(|meter| meter.take().min(1.0))
     }
 
+    /// The output's level per channel, likewise.
     pub fn take_output(&self) -> [f32; 2] {
-        take_stereo(&self.output)
+        self.output.each_ref().map(|meter| meter.take().min(1.0))
     }
 
     pub fn input_clipped(&self) -> [bool; 2] {
-        clipped_stereo(&self.input_clipped)
+        self.input.each_ref().map(mxm_telemetry::PeakMeter::clipped)
     }
 
     pub fn output_clipped(&self) -> [bool; 2] {
-        clipped_stereo(&self.output_clipped)
+        self.output
+            .each_ref()
+            .map(mxm_telemetry::PeakMeter::clipped)
     }
 
     pub fn clear_input_clip(&self, channel: usize) {
-        if let Some(clipped) = self.input_clipped.get(channel) {
-            clipped.store(false, Ordering::Relaxed);
+        if let Some(meter) = self.input.get(channel) {
+            meter.clear_clip();
         }
     }
 
     pub fn clear_output_clip(&self, channel: usize) {
-        if let Some(clipped) = self.output_clipped.get(channel) {
-            clipped.store(false, Ordering::Relaxed);
+        if let Some(meter) = self.output.get(channel) {
+            meter.clear_clip();
         }
     }
-}
-
-fn take_stereo(targets: &[AtomicU32; 2]) -> [f32; 2] {
-    targets
-        .each_ref()
-        .map(|peak| f32::from_bits(peak.swap(0, Ordering::AcqRel)))
-}
-
-fn clipped_stereo(targets: &[AtomicBool; 2]) -> [bool; 2] {
-    targets.each_ref().map(|clip| clip.load(Ordering::Relaxed))
 }
 
 fn peak_store(target: &AtomicU32, sample: f32) {
