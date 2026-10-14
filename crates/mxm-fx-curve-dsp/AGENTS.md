@@ -4,7 +4,8 @@ Parent: [`../../AGENTS.md`](../../AGENTS.md)
 
 # Purpose
 
-Framework-free, zero-runtime-dependency DSP for the original `mxm-fx-curve` effect: the accepted
+Framework-free DSP for the original `mxm-fx-curve` effect, depending only on the dependency-free
+`mxm-dsp` (the finite guard): the accepted
 point-curve model, bounded prepared evaluation, antialiased memoryless shaping, linked peak dynamics,
 a serial stage chain, the curve-derived nominal makeup estimate and the final dry/wet law.
 

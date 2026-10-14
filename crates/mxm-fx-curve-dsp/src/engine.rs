@@ -1,6 +1,7 @@
 //! A bounded serial stage chain and its dry/wet output law.
 
 use crate::stage::{Stage, StageError, StageSpec};
+use mxm_dsp::guard::finite_or;
 
 /// Provisional authored-stage ceiling.
 ///
@@ -62,7 +63,7 @@ impl CurveEngine {
         mix: f32,
         mut levels: Option<&mut [[f32; 2]; MAX_STAGES]>,
     ) -> ([f32; 2], usize) {
-        let dry = [finite(input[0]), finite(input[1])];
+        let dry = [finite_or(input[0], 0.0), finite_or(input[1], 0.0)];
         let mix = if mix.is_finite() {
             mix.clamp(0.0, 1.0)
         } else {
@@ -193,8 +194,4 @@ fn nominal_makeup_gain(stages: &[Stage]) -> f32 {
     } else {
         gain
     }
-}
-
-fn finite(sample: f32) -> f32 {
-    if sample.is_finite() { sample } else { 0.0 }
 }

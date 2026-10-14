@@ -144,7 +144,7 @@ locally (*Verification*).
 
 | Crate | MSRV | Why |
 |---|---|---|
-| `crates/mxm-fx-curve-dsp` | **1.87** | Zero runtime dependencies; the accepted point-curve evaluator, measured direct/ADAA memoryless selection, linked dynamics and bounded serial chain. Measurement tools are dev-only. **Verified on 1.87**, library, tests and examples |
+| `crates/mxm-fx-curve-dsp` | **1.87** | One runtime dependency, the dependency-free `mxm-dsp`; the accepted point-curve evaluator, measured direct/ADAA memoryless selection, linked dynamics and bounded serial chain. Measurement tools are dev-only. **Verified on 1.87**, library, tests and examples |
 | `plugins/mxm-fx-curve` | **1.95** | Its curve canvas and production editor pull in egui; depends on `mxm-fx-curve-dsp`, which stays at 1.87 |
 
 ## Licensing

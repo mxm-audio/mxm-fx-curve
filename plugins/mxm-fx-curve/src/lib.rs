@@ -385,11 +385,7 @@ fn apply_input_gain(frame: [f32; 2], gain: f32) -> [f32; 2] {
 }
 
 fn valid_sample_rate(sample_rate: f32) -> f32 {
-    if sample_rate.is_finite() {
-        sample_rate.clamp(1_000.0, 768_000.0)
-    } else {
-        48_000.0
-    }
+    mxm_dsp::guard::finite_or(sample_rate, 48_000.0).clamp(1_000.0, 768_000.0)
 }
 
 #[cfg(test)]
