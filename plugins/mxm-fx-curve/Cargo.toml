@@ -14,8 +14,8 @@ crate-type = ["cdylib", "lib"]
 [dependencies]
 egui.workspace = true
 mxm-dsp.workspace = true
+mxm-editor.workspace = true
 nice-plug.workspace = true
-nice-plug-egui.workspace = true
 mxm-fx-curve-dsp.workspace = true
 mxm-ui.workspace = true
 mxm-preset.workspace = true

@@ -11,7 +11,6 @@ use mxm_ui::theme::Tokens;
 use mxm_ui::tree::{self, Flow, Font, Height, Kind, Node};
 use nice_plug::context::gui::GuiContext;
 use nice_plug::prelude::*;
-use nice_plug_egui::{EguiEditorState, NiceEguiApp, create_egui_editor};
 use std::sync::Arc;
 
 const REFERENCE: (u32, u32) = (1024, 760);
@@ -30,29 +29,16 @@ const INPUT_CARD: u64 = 1;
 const OUTPUT_CARD: u64 = 2;
 const CURSOR_CARDS: [u64; 2] = [INPUT_CARD, OUTPUT_CARD];
 
-pub type MxmFxCurveEditor = nice_plug_egui::EguiEditor<MxmFxCurveApp>;
+pub type MxmFxCurveEditor = mxm_editor::Editor<MxmFxCurveApp>;
 
 pub fn create(
     params: Arc<MxmFxCurveParams>,
     telemetry: Arc<Telemetry>,
 ) -> Option<MxmFxCurveEditor> {
-    let state = EguiEditorState::from_size(
-        nice_plug::editor::dpi::LogicalSize::new(REFERENCE.0, REFERENCE.1),
-        1.0,
-    );
-    create_egui_editor(
-        state,
-        nice_plug_egui::RepaintNotifier::new(),
-        nice_plug_egui::EguiNiceSettings {
-            title: crate::NAME.to_owned(),
-            resize_hint: ResizeHint {
-                size_constraints: nice_plug::editor::SizeConstraints::min_logical_size(
-                    nice_plug::editor::dpi::LogicalSize::new(MINIMUM.0 as f32, MINIMUM.1 as f32),
-                ),
-                ..ResizeHint::RESIZABLE
-            },
-            ..Default::default()
-        },
+    mxm_editor::create(
+        crate::NAME,
+        REFERENCE,
+        MINIMUM,
         MxmFxCurveApp::new(params, telemetry),
     )
 }
@@ -385,25 +371,18 @@ impl MxmFxCurveApp {
     }
 }
 
-impl NiceEguiApp for MxmFxCurveApp {
-    fn build(
-        &mut self,
-        context: egui::Context,
-        gui_context: GuiContext,
-        _frame: &mut nice_plug_egui::Frame,
-    ) -> Result<(), nice_plug_egui::baseview::HandlerError> {
-        mxm_ui::shell::install(&context);
+impl mxm_editor::Panel for MxmFxCurveApp {
+    fn opened(&mut self, _context: &egui::Context, gui_context: &GuiContext) {
         self.telemetry.connect(true);
-        self.context = Some(gui_context);
+        self.context = Some(gui_context.clone());
         self.synchronize();
-        Ok(())
     }
 
-    fn ui(&mut self, ui: &mut Ui, _frame: &mut nice_plug_egui::Frame) {
+    fn ui(&mut self, ui: &mut Ui, _host: &GuiContext) {
         panel(ui, self);
     }
 
-    fn editor_closed(&mut self) {
+    fn closed(&mut self, _host: &GuiContext) {
         // A host may close the window mid-drag. An incomplete gesture is discarded rather than
         // becoming a surprising partial history step; completed history belongs to CurveField and
         // therefore survives this editor object.

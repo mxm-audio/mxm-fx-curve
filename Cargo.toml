@@ -20,6 +20,7 @@ repository = "https://github.com/mxm-audio/mxm-fx-curve"
 egui = "=0.36.1"
 mxm-control-map = { git = "https://github.com/mxm-audio/mxm-kit", branch = "main" }
 mxm-dsp = { git = "https://github.com/mxm-audio/mxm-kit", branch = "main" }
+mxm-editor = { git = "https://github.com/mxm-audio/mxm-kit", branch = "main" }
 mxm-fx-curve-dsp = { path = "crates/mxm-fx-curve-dsp" }
 mxm-measure = { git = "https://github.com/mxm-audio/mxm-kit", branch = "main" }
 mxm-plugin-test = { git = "https://github.com/mxm-audio/mxm-kit", branch = "main" }
