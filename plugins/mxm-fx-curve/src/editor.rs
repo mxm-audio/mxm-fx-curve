@@ -392,10 +392,7 @@ impl NiceEguiApp for MxmFxCurveApp {
         gui_context: GuiContext,
         _frame: &mut nice_plug_egui::Frame,
     ) -> Result<(), nice_plug_egui::baseview::HandlerError> {
-        mxm_ui::theme::apply(&context);
-        mxm_ui::typography::apply(&context);
-        context.set_theme(mxm_ui::theme::preference());
-        mxm_ui::navigation::use_shared_keymap(&context);
+        mxm_ui::shell::install(&context);
         self.telemetry.connect(true);
         self.context = Some(gui_context);
         self.synchronize();
