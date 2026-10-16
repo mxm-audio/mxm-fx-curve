@@ -370,7 +370,39 @@ impl ClapPlugin for MxmFxCurve {
     ];
 }
 
+impl Vst3Plugin for MxmFxCurve {
+    /// Permanent, as `CLAP_ID` is: the CLAP id's hash written out, held to it by
+    /// `identity::the_vst3_class_id_is_the_clap_ids_hash`.
+    const VST3_CLASS_ID: [u8; 16] = [
+        0x59, 0x31, 0x23, 0x6b, 0x4c, 0xed, 0x91, 0xdf, 0xdb, 0x30, 0x5f, 0xa1, 0xfe, 0x41, 0x45,
+        0x4f,
+    ];
+    const VST3_SUBCATEGORIES: &'static [Vst3SubCategory] = &[
+        Vst3SubCategory::Fx,
+        Vst3SubCategory::Dynamics,
+        Vst3SubCategory::Distortion,
+    ];
+}
+
 nice_export_clap!(MxmFxCurve);
+nice_export_vst3!(MxmFxCurve);
+
+/// The plugin's identity in each format.
+#[cfg(test)]
+mod identity {
+    use super::MxmFxCurve;
+    use mxm_plugin_test::formats;
+
+    #[test]
+    fn the_vst3_class_id_is_the_clap_ids_hash() {
+        formats::the_vst3_class_id_is_the_clap_ids_hash::<MxmFxCurve>();
+    }
+
+    #[test]
+    fn the_vst3_categories_follow_the_clap_features() {
+        formats::the_vst3_categories_follow_the_clap_features::<MxmFxCurve>();
+    }
+}
 
 fn apply_input_gain(frame: [f32; 2], gain: f32) -> [f32; 2] {
     if gain == 1.0 {
