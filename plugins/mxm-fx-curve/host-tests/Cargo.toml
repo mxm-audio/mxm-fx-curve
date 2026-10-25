@@ -1,0 +1,24 @@
+[package]
+name = "mxm-fx-curve-host-tests"
+description = "mxm-fx-curve hosted by MXM Player: discovery, parameters, the state path and the effect chain through the real host, against its release bundle. The slow tier: `cargo test -p mxm-fx-curve` never builds the player."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish = false
+
+[lib]
+# The tests are in `tests/`; the library is empty and not test-built.
+test = false
+doctest = false
+
+[dev-dependencies]
+mxm-player.workspace = true
+mxm-player-harness.workspace = true
+# Init is an exact no-op, so a changed Input gain is written into the saved state, as a host
+# restores one, through the CLAP state; the player's own versions.
+clack-extensions = { version = "=0.1.1", default-features = false, features = ["clack-host", "state"] }
+clack-host = "=0.1.1"
+serde_json = "=1.0.145"

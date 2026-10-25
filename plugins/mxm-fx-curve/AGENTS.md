@@ -21,6 +21,9 @@ transfer-curve effect. Framework-free processing stays in
 - `src/lib.rs` owns the CLAP shell, layouts, activity, tail behavior and editor construction.
 - `control-map.json` maps Mix to the existing dynamics role; Input gain and Auto makeup have no
   collection-wide role. The licence is the repository's root `LICENSE` (`../../LICENSE`).
+- `host-tests/` is the release bundle through MXM Player: discovery and the map's role, every
+  parameter read, a changed Input gain saved and reopened, Init bit-exact dry, a restored Input
+  gain heard, and bypass. Init is the no-op, so what it hears is set through the CLAP state.
 
 # Local Contracts
 
@@ -163,6 +166,8 @@ cargo clippy -p mxm-fx-curve --all-targets -- -D warnings
 MXM_PICTURES=after cargo test -p mxm-fx-curve --lib tree_pictures -- --ignored   # target/layout-tree/mxm-fx-curve/after/
 cargo xtask bundle mxm-fx-curve
 clap-validator validate target/bundled/mxm-fx-curve.clap
+cargo xtask bundle mxm-fx-curve --release && cargo xtask fetch   # the host tests' bundle and source
+cargo test -p mxm-fx-curve-host-tests --test effect_chain
 ```
 
 What the unit suite covers and the last bundle/validator/native results:
