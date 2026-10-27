@@ -14,7 +14,7 @@ transfer-curve effect. Framework-free processing stays in
 - `src/model.rs` owns persisted schema version 1 and conversion into DSP stage specifications.
 - `src/publication.rs` owns prepared-engine publication, transition and off-audio retirement.
 - `src/params.rs` owns Input gain, Auto makeup, Mix, the durable curve-stack field, preset staging and its bounded snapshot history.
-- `src/preset.rs`, `src/preset_designs.rs` and `presets/` own the shared preset seam, reviewable source table and sixty compiled factory sounds.
+- `src/preset.rs`, `src/preset_designs.rs` and `presets/` own the shared preset seam, reviewable source table and the sixty factory sounds' files, installed with the plugin.
 - `src/canvas.rs` owns the accepted point/handle interaction and keyboard surface.
 - `src/editor.rs` owns the production shell, stage chain controls, reflow and complete model gestures.
 - `src/telemetry.rs` owns lock-free per-stage signal-on-curve observation plus stereo post-input-gain and post-Mix peak/clip publication.
@@ -83,7 +83,7 @@ transfer-curve effect. Framework-free processing stays in
   allocation-free fingerprint, so moving only a point, mode, handle, stage, detector setting or stage
   order marks a loaded preset modified.
 - Sixty factory sounds; the source table in `src/preset_designs.rs` is authoritative, and a test
-  compares every compiled file with a fresh generation
+  compares every file in `presets/` with a fresh generation
   ([NOTES.md § The factory sounds](NOTES.md#the-factory-sounds)).
 - Preset models prepare completely before global-parameter gestures and publish only after them. An
   unchanged model publishes nothing and preserves undo history; a changed preset or Init begins a new

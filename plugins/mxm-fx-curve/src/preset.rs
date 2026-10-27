@@ -27,8 +27,13 @@ impl Instrument for MxmFxCurveParams {
         &self.preset
     }
 
-    fn factory_files(&self) -> &'static [(&'static str, &'static str)] {
+    /// The installed set, but in a unit test, which is loaded from no bundle: the repository's.
+    #[cfg(test)]
+    fn factory_files(&self) -> Vec<(String, String)> {
         FACTORY_FILES
+            .iter()
+            .map(|(name, json)| ((*name).to_owned(), (*json).to_owned()))
+            .collect()
     }
 
     fn init_preset_state(&self) -> Option<serde_json::Value> {
@@ -74,176 +79,22 @@ fn decode_state(state: Option<&serde_json::Value>) -> Result<CurveStackState, St
     serde_json::from_value(state.clone()).map_err(|error| format!("invalid curve stack: {error}"))
 }
 
-pub const FACTORY_FILES: &[(&str, &str)] = &[
-    (
-        "Vocal leveler",
-        include_str!("../presets/vocal-leveler.json"),
-    ),
-    ("Bus glue", include_str!("../presets/bus-glue.json")),
-    (
-        "Punch compressor",
-        include_str!("../presets/punch-compressor.json"),
-    ),
-    (
-        "Slow leveller",
-        include_str!("../presets/slow-leveller.json"),
-    ),
-    (
-        "Fast peak tamer",
-        include_str!("../presets/fast-peak-tamer.json"),
-    ),
-    ("Soft limiter", include_str!("../presets/soft-limiter.json")),
-    (
-        "Brickwall limiter",
-        include_str!("../presets/brickwall-limiter.json"),
-    ),
-    (
-        "Transient clamp",
-        include_str!("../presets/transient-clamp.json"),
-    ),
-    (
-        "Pumping compressor",
-        include_str!("../presets/pumping-compressor.json"),
-    ),
-    (
-        "Parallel squeeze",
-        include_str!("../presets/parallel-squeeze.json"),
-    ),
-    ("Upward lift", include_str!("../presets/upward-lift.json")),
-    (
-        "Low level detail",
-        include_str!("../presets/low-level-detail.json"),
-    ),
-    (
-        "Gentle expander",
-        include_str!("../presets/gentle-expander.json"),
-    ),
-    (
-        "Downward expander",
-        include_str!("../presets/downward-expander.json"),
-    ),
-    ("Noise gate", include_str!("../presets/noise-gate.json")),
-    ("Hard gate", include_str!("../presets/hard-gate.json")),
-    ("Drum gate", include_str!("../presets/drum-gate.json")),
-    ("Breath gate", include_str!("../presets/breath-gate.json")),
-    (
-        "Floor suppressor",
-        include_str!("../presets/floor-suppressor.json"),
-    ),
-    ("Crest rider", include_str!("../presets/crest-rider.json")),
-    (
-        "Soft saturation",
-        include_str!("../presets/soft-saturation.json"),
-    ),
-    (
-        "Rounded drive",
-        include_str!("../presets/rounded-drive.json"),
-    ),
-    ("Hard clip", include_str!("../presets/hard-clip.json")),
-    ("Dense clip", include_str!("../presets/dense-clip.json")),
-    (
-        "Gentle overdrive",
-        include_str!("../presets/gentle-overdrive.json"),
-    ),
-    (
-        "Hot overdrive",
-        include_str!("../presets/hot-overdrive.json"),
-    ),
-    ("Fuzz", include_str!("../presets/fuzz.json")),
-    ("Square maker", include_str!("../presets/square-maker.json")),
-    ("Dead zone", include_str!("../presets/dead-zone.json")),
-    (
-        "Crossover crunch",
-        include_str!("../presets/crossover-crunch.json"),
-    ),
-    ("Single fold", include_str!("../presets/single-fold.json")),
-    ("Double fold", include_str!("../presets/double-fold.json")),
-    ("Triple fold", include_str!("../presets/triple-fold.json")),
-    (
-        "Triangle shaper",
-        include_str!("../presets/triangle-shaper.json"),
-    ),
-    ("S curve", include_str!("../presets/s-curve.json")),
-    (
-        "Concave boost",
-        include_str!("../presets/concave-boost.json"),
-    ),
-    ("Convex cut", include_str!("../presets/convex-cut.json")),
-    (
-        "Four step quantizer",
-        include_str!("../presets/four-step-quantizer.json"),
-    ),
-    (
-        "Eight step quantizer",
-        include_str!("../presets/eight-step-quantizer.json"),
-    ),
-    ("Comparator", include_str!("../presets/comparator.json")),
-    (
-        "Staircase drive",
-        include_str!("../presets/staircase-drive.json"),
-    ),
-    ("Broken cone", include_str!("../presets/broken-cone.json")),
-    ("Needle clip", include_str!("../presets/needle-clip.json")),
-    ("Hollow clip", include_str!("../presets/hollow-clip.json")),
-    ("Range crush", include_str!("../presets/range-crush.json")),
-    (
-        "Compressor into saturation",
-        include_str!("../presets/compressor-into-saturation.json"),
-    ),
-    (
-        "Saturation into compressor",
-        include_str!("../presets/saturation-into-compressor.json"),
-    ),
-    (
-        "Gate into drive",
-        include_str!("../presets/gate-into-drive.json"),
-    ),
-    (
-        "Drive into gate",
-        include_str!("../presets/drive-into-gate.json"),
-    ),
-    (
-        "Expander into limiter",
-        include_str!("../presets/expander-into-limiter.json"),
-    ),
-    (
-        "Two stage limiter",
-        include_str!("../presets/two-stage-limiter.json"),
-    ),
-    (
-        "Soft then hard",
-        include_str!("../presets/soft-then-hard.json"),
-    ),
-    (
-        "Fold then clip",
-        include_str!("../presets/fold-then-clip.json"),
-    ),
-    (
-        "Clip then fold",
-        include_str!("../presets/clip-then-fold.json"),
-    ),
-    (
-        "Detail then glue",
-        include_str!("../presets/detail-then-glue.json"),
-    ),
-    (
-        "Pump and crunch",
-        include_str!("../presets/pump-and-crunch.json"),
-    ),
-    (
-        "Gate comp clip",
-        include_str!("../presets/gate-comp-clip.json"),
-    ),
-    (
-        "Five stage crusher",
-        include_str!("../presets/five-stage-crusher.json"),
-    ),
-    ("Unity curve", include_str!("../presets/unity-curve.json")),
-    (
-        "Manual bezier",
-        include_str!("../presets/manual-bezier.json"),
-    ),
-];
+/// The factory set as it ships, `(name, json)` in its order: the repository's `presets/`, which
+/// is installed beside the plugin and read there (`mxm_preset::installed_factory_dir`). For the
+/// tests, the integration tests and the audits, which are loaded from no bundle; the plugin itself
+/// never reads it.
+pub static FACTORY_FILES: std::sync::LazyLock<Vec<(&'static str, &'static str)>> =
+    std::sync::LazyLock::new(|| {
+        let folder = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("presets");
+        mxm_preset::read_factory_dir(&folder)
+            .into_iter()
+            .map(|(file, json)| {
+                let name = mxm_preset::Preset::parse(&json, crate::CLAP_ID)
+                    .map_or(file, |preset| preset.name);
+                (&*String::leak(name), &*String::leak(json))
+            })
+            .collect()
+    });
 
 #[cfg(test)]
 mod tests {
@@ -327,7 +178,7 @@ mod tests {
         let mut serial = false;
         let mut discontinuous = false;
         let mut handles = false;
-        for (name, json) in FACTORY_FILES {
+        for (name, json) in FACTORY_FILES.iter() {
             let preset = Preset::parse(json, crate::CLAP_ID).expect(name);
             assert!(names.insert(preset.name.clone()), "duplicate name {name}");
             assert_ne!(preset.category, Category::Uncategorised, "{name}");

@@ -59,7 +59,7 @@ Sixty factory sounds cover linked compression, limiting, upward and downward dyn
 noise gates, memoryless saturation/clipping/fuzz/folding/quantisation, equal-X discontinuities,
 manual handles and order-sensitive serial combinations up to the five-stage limit. The source table
 in `src/preset_designs.rs` is authoritative; the generator writes complete JSON and a test compares
-every compiled file with a fresh generation.
+every file in `presets/` with a fresh generation.
 
 ## Canvas interaction and gestures
 
